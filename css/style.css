@@ -42,6 +42,12 @@ button {
     cursor: pointer;
 }
 
+.selected {
+    color: #220efa;
+    background-color: #f6f6f7;
+    border: 2px solid #220efa;
+}
+
 #product {
     display: flex;
     flex-wrap: wrap;
@@ -64,7 +70,7 @@ button {
     border-radius: 1rem;
 }
 
-.product-item p{
+.product-item p {
     color: gray;
     margin: .5rem 0 1rem;
 }
