@@ -1,9 +1,10 @@
 const searchInput = document.getElementById("search-input");
 const productItem = document.querySelectorAll(".product-item");
 const buttons = document.querySelectorAll(".filter");
+const priceInput = document.getElementById("search-price").querySelector("input");
+const priceButton = document.getElementById("search-price").querySelector("button");
 
 const changeClass = (filter) => {
-    console.log(filter);
     buttons.forEach((button) => {
         if (button.dataset.filter === filter) {
             button?.classList?.add("selected")
@@ -43,8 +44,31 @@ const filterHandler = (event) => {
     })
 }
 
-searchInput.addEventListener("keyup", searchHandler);
+const searchPriceHandler = (event) => {
+    const searchPrice = +event.target.parentElement.children[0].value;
+    productItem.forEach((product) => {
+        const productPrice = product.children[2].innerText;
+        const price = +productPrice.split(" ")[1]
+        if (!searchPrice) {
+            product.style.display = "block";
+        } else {
+            if (price === searchPrice) {
+                product.style.display = "block";
+            } else {
+                product.style.display = "none";
+            }
+        }
+    })
+}
 
-buttons.forEach((button) => {
-    button.addEventListener("click", filterHandler)
-})
+const start = () => {
+    searchInput.addEventListener("keyup", searchHandler);
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", filterHandler)
+    })
+
+    priceButton.addEventListener("click", searchPriceHandler)
+}
+
+window.addEventListener("load", start)
